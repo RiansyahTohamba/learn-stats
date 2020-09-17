@@ -1,0 +1,113 @@
+   """
+    Calculate the Wilcoxon signed-rank test.
+
+    The Wilcoxon signed-rank test tests the null hypothesis that two
+    related paired samples come from the same distribution. In particular,
+    it tests whether the distribution of the differences x - y is symmetric
+    about zero. It is a non-parametric version of the paired T-test.
+
+    Parameters
+    ----------
+    x : array_like
+        Either the first set of measurements (in which case `y` is the second
+        set of measurements), or the differences between two sets of
+        measurements (in which case `y` is not to be specified.)  Must be
+        one-dimensional.
+    y : array_like, optional
+        Either the second set of measurements (if `x` is the first set of
+        measurements), or not specified (if `x` is the differences between
+        two sets of measurements.)  Must be one-dimensional.
+    zero_method : {'pratt', 'wilcox', 'zsplit'}, optional
+        The following options are available (default is 'wilcox'):
+     
+          * 'pratt': Includes zero-differences in the ranking process,
+            but drops the ranks of the zeros, see [4]_, (more conservative).
+          * 'wilcox': Discards all zero-differences, the default.
+          * 'zsplit': Includes zero-differences in the ranking process and 
+            split the zero rank between positive and negative ones.
+    correction : bool, optional
+        If True, apply continuity correction by adjusting the Wilcoxon rank
+        statistic by 0.5 towards the mean value when computing the
+        z-statistic.  Default is False.
+    alternative : {"two-sided", "greater", "less"}, optional
+        The alternative hypothesis to be tested, see Notes. Default is
+        "two-sided".
+
+    Returns
+    -------
+    statistic : float
+        If `alternative` is "two-sided", the sum of the ranks of the
+        differences above or below zero, whichever is smaller.
+        Otherwise the sum of the ranks of the differences above zero.
+    pvalue : float
+        The p-value for the test depending on `alternative`.
+
+    See Also
+    --------
+    kruskal, mannwhitneyu
+
+    Notes
+    -----
+    The test has been introduced in [4]_. Given n independent samples
+    (xi, yi) from a bivariate distribution (i.e. paired samples),
+    it computes the differences di = xi - yi. One assumption of the test
+    is that the differences are symmetric, see [2]_.
+    The two-sided test has the null hypothesis that the median of the
+    differences is zero against the alternative that it is different from
+    zero. The one-sided test has the null hypothesis that the median is 
+    positive against the alternative that it is negative 
+    (``alternative == 'less'``), or vice versa (``alternative == 'greater.'``).
+
+    The test uses a normal approximation to derive the p-value (if
+    ``zero_method == 'pratt'``, the approximation is adjusted as in [5]_).
+    A typical rule is to require that n > 20 ([2]_, p. 383). For smaller n,
+    exact tables can be used to find critical values.
+
+    References
+    ----------
+    .. [1] https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test
+    .. [2] Conover, W.J., Practical Nonparametric Statistics, 1971.
+    .. [3] Pratt, J.W., Remarks on Zeros and Ties in the Wilcoxon Signed
+       Rank Procedures, Journal of the American Statistical Association,
+       Vol. 54, 1959, pp. 655-667. :doi:`10.1080/01621459.1959.10501526`
+    .. [4] Wilcoxon, F., Individual Comparisons by Ranking Methods,
+       Biometrics Bulletin, Vol. 1, 1945, pp. 80-83. :doi:`10.2307/3001968`
+    .. [5] Cureton, E.E., The Normal Approximation to the Signed-Rank
+       Sampling Distribution When Zero Differences are Present,
+       Journal of the American Statistical Association, Vol. 62, 1967,
+       pp. 1068-1069. :doi:`10.1080/01621459.1967.10500917`
+
+    Examples
+    --------
+    In [4]_, the differences in height between cross- and self-fertilized
+    corn plants is given as follows:
+
+    >>> d = [6, 8, 14, 16, 23, 24, 28, 29, 41, -48, 49, 56, 60, -67, 75]
+
+    Cross-fertilized plants appear to be be higher. To test the null
+    hypothesis that there is no height difference, we can apply the
+    two-sided test:
+
+    >>> from scipy.stats import wilcoxon
+    >>> w, p = wilcoxon(d)
+    >>> w, p
+    (24.0, 0.04088813291185591)
+
+    Hence, we would reject the null hypothesis at a confidence level of 5%,
+    concluding that there is a difference in height between the groups.
+    To confirm that the median of the differences can be assumed to be
+    positive, we use:
+
+    >>> w, p = wilcoxon(d, alternative='greater')
+    >>> w, p
+    (96.0, 0.020444066455927955)
+
+    This shows that the null hypothesis that the median is negative can be
+    rejected at a confidence level of 5% in favor of the alternative that
+    the median is greater than zero. The p-value based on the approximation
+    is within the range of 0.019 and 0.054 given in [2]_.
+    Note that the statistic changed to 96 in the one-sided case (the sum
+    of ranks of positive differences) whereas it is 24 in the two-sided
+    case (the minimum of sum of ranks above and below zero).
+
+    """
