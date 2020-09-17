@@ -30,7 +30,7 @@ class MainEstimates:
     #step 3 : Predict the number of people who will be available to do the work is specified.
     def predicting_staffing_levels():
         number_of_available_people = 100
-        
+
     #step 4: predicting_effort          
     def predicting_effort(models,size_work_products):
         #Estimation tools use one or more models (Section 33.7) 
@@ -52,6 +52,7 @@ class MainEstimates:
         pass
     
     def effort_distribution():
+        # chapter ?
         pass    
 
     def predicting_schedule():
