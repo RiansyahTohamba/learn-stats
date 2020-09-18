@@ -59,7 +59,6 @@ class Wilcoxon:
             r_minus += r_zero / 2.
 
         T_val = self.set_t_val(alternative, r_minus, r_plus)
-
         mn = count * (count + 1.) * 0.25
         se = count * (count + 1.) * (2. * count + 1.)
 
