@@ -1,3 +1,9 @@
+import numpy as np
+from numpy import (isscalar, r_, log, around, unique, asarray,
+                   zeros, arange, sort, amin, amax, any, atleast_1d,
+                   sqrt, ceil, floor, array, compress,
+                   pi, exp, ravel, count_nonzero, sin, cos, arctan2, hypot)
+
 WilcoxonResult = namedtuple('WilcoxonResult', ('statistic', 'pvalue'))
 
 
