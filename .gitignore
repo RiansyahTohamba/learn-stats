@@ -1,6 +1,6 @@
 # Created by https://www.gitignore.io/api/vim,ipythonnotebook,virtualenv
 # nanti cari papernya saja sendiri
-nlp/papers
+nlp/papers/*.txt
 ### Vim ###
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
