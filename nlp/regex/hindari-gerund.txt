@@ -1,0 +1,37 @@
+hindari-gerund
+.*\bin\b(?!\b.+ing) = menghindari gerund verb+ing 
+
+# ?! = excluding
+\b(?!\b
+
+The following example searches for strings that contain the word in. 
+
+The special regular expression (?!\b.+ing\b) is a negative lookahead assertion that allows us to disregard strings such as 
+"success in supervising the transition of", 
+
+bukalapak in jakarta.
+
+where in is followed by a gerund.
+
+.+ing = anything + ing == gerund
+
+success in proposing 
+
+[ˆcat$] Literally means: 
+^ = diawal line, tidak boleh ada karakter apapun bahkan \s
+$ = diakhir line (\n), tidak boleh ada karakter apapun bahkan \s
+followed immediately by c ⋅ a ⋅ t
+a line that consists of only cat — no extra words,
+spaces, punctuation... just ‘cat’.
+---
+contoh
+hai cat
+cat harus diawal
+tapi cat
+cat
+----
+
+[ˆ$] Literally means: empty line
+
+[ˆ] Literally means: cocok dengan semua line yang sudah dibuka
+
