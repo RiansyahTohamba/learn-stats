@@ -22,8 +22,16 @@ def eksporTree():
 	with open("tree.txt", "w") as output:
 		output.write(str(nltk.ne_chunk(sent)))
 
+def ideComparative():
+	# ide comparative? JJR dan RBR
+	# bagus nih,buat membandingkan a > b atau a < b
+	# 1. search tuple dengan value JJR OR RBR
+	# 2. 
+	pass
+
 # teknik filter yang baik?
-# comparative? JJR dan RBR
+
+
 # alvesSentences = ie_preprocess(open('papers/alves2010.txt').read())
 # print(alvesSentences[1])
 eksporTree()

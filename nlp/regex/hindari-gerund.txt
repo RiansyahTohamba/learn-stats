@@ -16,7 +16,7 @@ The special regular expression (?!\b.+ing\b) is a negative lookahead assertion t
 
 bukalapak in jakarta.
 
-where in is followed by a gerund.
+where in is folowed by a gerund.
 
 .+ing = anything + ing == gerund
 
